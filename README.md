@@ -1,5 +1,7 @@
 # PHP Blockchain
 
+<a href = "https://travis-ci.org/DavidNgugi/php-blockchain" title = "Buy Me a Coffee" target="_blank"><img src="https://travis-ci.org/DavidNgugi/php-blockchain.svg?branch=master"/></a>
+
 A simple implementation of a blockchain using the PHP programming language. It still has far to go and contributions are welcomed.
 
 # Installation
