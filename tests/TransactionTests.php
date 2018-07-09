@@ -14,6 +14,10 @@ class TransactionTests extends TestCase
 	{
 		$transaction = new Transaction("David", "Dan", "1000");
 		$this->assertInstanceOf(Transaction::class, $transaction);
+
+		$this->assertEquals("David", $transaction->getFrom());
+		$this->assertEquals("Dan", $transaction->getTo());
+		$this->assertEquals(1000, $transaction->getAmount());
 	}
 	
 }

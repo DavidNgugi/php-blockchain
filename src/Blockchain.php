@@ -5,7 +5,7 @@ namespace PHPBlockchain;
 use PHPBlockchain\Block;
 
 /**
- * 
+ * Main Blockchain class where the magic happens :)
  */
 class Blockchain
 {
@@ -17,9 +17,16 @@ class Blockchain
 		$this->blocks = [];
 		$this->addBlock($genesisBlock);
 	}
-
+	/**
+	 * Adds a new block to the blockchain
+	 * 
+	 * @param Block $block
+	 *  
+     * @return void
+    */
 	public function addBlock(Block $block) : Void
 	{
+		// create genesis block
 		if (count($this->blocks) == 0) {
 			$block->setPreviousHash("0000000000000000");
 			$new_hash = $this->generateHash($block);
@@ -29,6 +36,13 @@ class Blockchain
 		$this->blocks[] = $block;
 	}
 
+	/**
+	 * Sets the new and previous block's hashes and transaction data
+	 * 
+	 * @param $transactions
+	 *  
+     * @return Block
+    */
 	public function getNextBlock($transactions) : Block
 	{
 		$block = new Block();
@@ -46,6 +60,13 @@ class Blockchain
 		return $block;
 	}
 
+	/**
+	 * Generate a new hash for a new block
+	 * 
+	 * @param Block $block
+	 *  
+     * @return string 
+    */
 	private function generateHash(Block $block) : String
 	{
 		$new_hash = hash('sha256', $block->getContent());
@@ -58,6 +79,11 @@ class Blockchain
 		return $new_hash;
 	}
 
+	/**
+	 * Gets the previous block in the blockchain
+	 *  
+     * @return Block Previous block
+    */
 	private function getPreviousBlock() : Block
 	{
 		$pos = count($this->blocks) - 1;

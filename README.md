@@ -10,6 +10,12 @@ A simple implementation of a blockchain using the PHP programming language. It s
 composer require davidngugi/php-blockchain
 ```
 
+# Run Tests
+
+```bash
+php vendor/phpunit/phpunit/phpunit
+```
+
 # Contribution
 
 All contributions (big or small) are highly welcomed. Send a PR

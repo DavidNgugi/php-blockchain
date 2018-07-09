@@ -23,31 +23,49 @@ class BlockTests extends TestCase
 		$this->assertInstanceOf(Block::class, $this->block);
 	}
 
+	/**
+      * @depends testBlockIsValid
+    */
 	public function testIndexIsSet()
 	{
 		$this->assertSame(0, $this->block->index);
 	}
 
+	/**
+      * @depends testBlockIsValid
+    */
 	public function testNonceIsSet()
 	{
 		$this->assertSame(0, $this->block->nonce);
 	}
 
+	/**
+      * @depends testBlockIsValid
+    */
 	public function testPreviousHashNotSet()
 	{
 		$this->assertSame("", $this->block->getPreviousHash());
 	}
 
+	/**
+      * @depends testBlockIsValid
+    */
 	public function testCurrentHashNotSet()
 	{
 		$this->assertSame("", $this->block->getCurrentHash());
 	}
 
+	/**
+      * @depends testBlockIsValid
+    */
 	public function testTransactionsEmpty()
 	{
 		$this->assertEmpty($this->block->getTransactions());
 	}
 
+	/**
+      * @depends testBlockIsValid
+    */
 	public function testCanAddTransaction()
 	{
 		$transaction = new Transaction("David", "Dan", 1000);
