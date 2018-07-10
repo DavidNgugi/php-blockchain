@@ -20,7 +20,7 @@ class Blockchain
 	/**
 	 * Adds a new block to the blockchain
 	 * 
-	 * @param Block $block
+	 * @param PHPBlockchain\Block $block
 	 *  
      * @return void
     */
@@ -41,7 +41,7 @@ class Blockchain
 	 * 
 	 * @param $transactions
 	 *  
-     * @return Block
+     * @return PHPBlockchain\Block
     */
 	public function getNextBlock($transactions) : Block
 	{
@@ -63,7 +63,7 @@ class Blockchain
 	/**
 	 * Generate a new hash for a new block
 	 * 
-	 * @param Block $block
+	 * @param PHPBlockchain\Block $block
 	 *  
      * @return string 
     */
@@ -82,7 +82,7 @@ class Blockchain
 	/**
 	 * Gets the previous block in the blockchain
 	 *  
-     * @return Block Previous block
+     * @return PHPBlockchain\Block
     */
 	private function getPreviousBlock() : Block
 	{
