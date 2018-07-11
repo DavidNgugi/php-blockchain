@@ -30,6 +30,7 @@ class Blockchain
 		if (count($this->blocks) == 0) {
 			$block->setPreviousHash("0000000000000000");
 			$new_hash = $this->generateHash($block);
+			$block->setTimestamp();
 			$block->setCurrentHash($new_hash);
 		}
 
@@ -47,8 +48,10 @@ class Blockchain
 	{
 		$block = new Block();
 
-		foreach ($transactions as $transaction) {
-			$block->addTransaction($transaction);
+		if(isset($transactions)){
+			foreach ($transactions as $transaction) {
+				$block->addTransaction($transaction);
+			}
 		}
 
 		$previousBlock = $this->getPreviousBlock();
@@ -56,6 +59,7 @@ class Blockchain
 		$block->setPreviousHash($previousBlock->getCurrentHash());
 		$new_hash = $this->generateHash($block);
 		$block->setCurrentHash($new_hash);
+		$block->setTimestamp();
 
 		return $block;
 	}

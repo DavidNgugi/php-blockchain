@@ -17,6 +17,13 @@ class Block
     public $index;
 
     /**
+     * Current timestamp when block was created
+     *
+     * @var int
+     */
+    private $timestamp;
+
+    /**
      * The previous block's hash
      *
      * @var string
@@ -73,6 +80,26 @@ class Block
     public function getPreviousHash() : String
     {
         return $this->previousHash;
+    }
+
+     /**
+     * Sets the timestamp of the current block
+     * 
+     * @return void
+    */
+    public function setTimestamp() : Void
+    {
+        $this->timestamp = time();
+    }
+
+    /**
+     * Gets the timestamp of the block
+     *  
+     * @return int
+    */
+    public function getTimestamp() : int
+    {
+        return $this->timestamp;
     }
 
     /**

@@ -42,6 +42,23 @@ class BlockTests extends TestCase
 	/**
       * @depends testBlockIsValid
     */
+	public function testTimestampIsNotSet()
+	{
+		$this->assertAttributeEmpty('timestamp', $this->block);
+	}
+
+	/**
+      * @depends testBlockIsValid
+    */
+	public function testTimestampIsSet()
+	{
+		$this->block->setTimestamp();
+		$this->assertAttributeNotEmpty('timestamp', $this->block);
+	}
+
+	/**
+      * @depends testBlockIsValid
+    */
 	public function testPreviousHashNotSet()
 	{
 		$this->assertSame("", $this->block->getPreviousHash());
