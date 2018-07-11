@@ -20,6 +20,12 @@ php vendor/phpunit/phpunit/phpunit
 
 The PHPBlockchain\TestBlockchain::class has a basic working implementation of this blockchain. It shows how you can add transactions to the blockchain.
 
+Run it from the terminal:
+
+```bash
+php src/TestBlockchain.php
+```
+
 Example,
 
 ```php
