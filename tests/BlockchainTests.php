@@ -5,7 +5,7 @@ namespace Tests;
 
 use PHPUnit\Framework\TestCase;
 
-use PHPBlockchain\Block;
+use PHPBlockchain\{Blockchain, Block, Transaction};
 
 /**
  * 

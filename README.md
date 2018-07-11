@@ -4,33 +4,61 @@
 
 A simple implementation of a blockchain using the PHP programming language. It still has far to go and contributions are welcomed.
 
-# Installation
+## Installation
 
 ```bash
 composer require davidngugi/php-blockchain
 ```
 
-# Run Tests
+## Run Tests
 
 ```bash
 php vendor/phpunit/phpunit/phpunit
 ```
 
-# Contribution
+## Run Fake Transactions
 
-All contributions (big or small) are highly welcomed. Send a PR
+The PHPBlockchain\TestBlockchain::class has a basic working implementation of this blockchain. It shows how you can add transactions to the blockchain.
 
-# Authors
+Example,
+
+```php
+$blockchain = new TestBlockchain;
+$blockchain->addNewTransactions('David', 'Dan', 200);
+$blockchain->addNewTransactions('Dan', 'David', 100);
+```
+
+## To-Do
+
+* Add more Tests for the Blockchain
+* Improve the Proof-of-Work (PoW) algorithm or evaluate whether to switch to a Proof-of-Stake (PoS) is worth it
+* Add Address class
+* Design changes
+* Clean up for publishing to packagist
+
+## Contribution
+
+All contributions (big or small) are highly welcomed.
+
+1. Fork the project
+2. Open an issue on this repo
+3. Work out a solution on your fork and ensure all tests run successfully
+4. Send a PR associated with the issue you opened
+5. PR will be evaluated and if approved, merged into the project and the issue closed
+
+It's as simple as that! :)
+
+## Authors
 
 * David Ngugi <david@davidngugi.com>
 
-# Support
+## Support
 
 If you would love to support the continuous development and maintenance of this package, please consider buying me a coffee.
 
 <a href = "https://www.buymeacoffee.com/DavidNgugi" title = "Buy Me a Coffee" target="_blank"><img src="https://github.com/DavidNgugi/php-blockchain/blob/master/coffee.jpg?raw=true" width="240px" height ="150px"/></a>
 
-# License
+## License
 
 This package is open-sourced software licensed under the [MIT Licence](https://github.com/DavidNgugi/php-blockchain/blob/master/LICENSE)
 

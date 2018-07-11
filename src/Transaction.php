@@ -7,9 +7,25 @@ namespace PHPBlockchain;
  */
 class Transaction
 {
-	
+	/**
+     * The sender
+     * 
+     * @var string
+    */
 	private $from;
+
+	/**
+     * The recepient
+     * 
+     * @var string 
+    */
 	private $to;
+
+	/**
+     * The amount of course :)
+     * 
+     * @var int 
+    */
 	private $amount;
 
 	/**
@@ -21,7 +37,7 @@ class Transaction
 	 *  
      * @return void
     */
-	function __construct($from, $to, $amount)
+	public function __construct($from, $to, $amount)
 	{
 		$this->from = $from;
 		$this->to = $to;

@@ -39,10 +39,10 @@ class Block
 
     /**
      * Represents a pseudo-random number that can only be used once
-     *
+     * 
      * @var int
      */
-    public $nonce;
+    private $nonce;
 
     /**
      * A collection of transaxctions associated with a block
@@ -51,7 +51,7 @@ class Block
      */
     private $transactions;
 
-    function __construct()
+    public function __construct()
     {
         $this->index = 0;
         $this->previousHash = "";
@@ -67,7 +67,7 @@ class Block
      *  
      * @return void
     */
-    public function setPreviousHash($value = '') : Void
+    public function setPreviousHash($value) : Void
     {
         $this->previousHash = $value;
     }
@@ -82,7 +82,7 @@ class Block
         return $this->previousHash;
     }
 
-     /**
+    /**
      * Sets the timestamp of the current block
      * 
      * @return void
@@ -102,6 +102,26 @@ class Block
         return $this->timestamp;
     }
 
+     /**
+     * Sets the nonce of the current block
+     * 
+     * @return void
+    */
+    public function setNonce($value) : Void
+    {
+        $this->nonce = $value;
+    }
+
+    /**
+     * Gets the nonce of the block
+     *  
+     * @return int
+    */
+    public function getNonce() : int
+    {
+        return $this->nonce;
+    }
+
     /**
      * Sets the current hash for a new block
      * 
@@ -109,7 +129,7 @@ class Block
      *  
      * @return void
     */
-    public function setCurrentHash($value = '') : Void
+    public function setCurrentHash($value) : Void
     {
         $this->currentHash = $value;
     }

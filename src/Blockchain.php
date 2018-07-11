@@ -9,23 +9,28 @@ use PHPBlockchain\Block;
  */
 class Blockchain
 {
-	
+	/**
+	 * All blocks on the Blockchain
+	 * 
+ 	 * @var array
+ 	*/
 	private $blocks;
 
-	function __construct(Block $genesisBlock)
+	public function __construct()
 	{
 		$this->blocks = [];
-		$this->addBlock($genesisBlock);
+		$this->addGenesisBlock();
 	}
 	/**
 	 * Adds a new block to the blockchain
 	 * 
-	 * @param PHPBlockchain\Block $block
 	 *  
      * @return void
     */
-	public function addBlock(Block $block) : Void
+	public function addGenesisBlock() : Void
 	{
+		$block = new Block();
+
 		// create genesis block
 		if (count($this->blocks) == 0) {
 			$block->setPreviousHash("0000000000000000");
@@ -39,12 +44,12 @@ class Blockchain
 
 	/**
 	 * Sets the new and previous block's hashes and transaction data
+	 * Adds new block to blockchain
 	 * 
-	 * @param $transactions
+	 * @param array $transactions
 	 *  
-     * @return PHPBlockchain\Block
     */
-	public function getNextBlock($transactions) : Block
+	public function addNewBlock($transactions) : Void
 	{
 		$block = new Block();
 
@@ -54,14 +59,18 @@ class Blockchain
 			}
 		}
 
+		$len = count($this->blocks);
 		$previousBlock = $this->getPreviousBlock();
-		$block->index = count($this->blocks);
+		$block->index = $len;
 		$block->setPreviousHash($previousBlock->getCurrentHash());
 		$new_hash = $this->generateHash($block);
 		$block->setCurrentHash($new_hash);
 		$block->setTimestamp();
 
-		return $block;
+		$this->blocks[$len-1] = $previousBlock; // update the previous block
+		$this->blocks[] = $block; // add the new block to the blockchain
+
+		$transactions = []; // reset transactions
 	}
 
 	/**
@@ -75,8 +84,11 @@ class Blockchain
 	{
 		$new_hash = hash('sha256', $block->getContent());
 
+		$nonce = $block->getNonce();
+		// Proof of Work
 		while(substr($new_hash, 0, 4) != '0000') {
-			$block->nonce += 1;
+			$nonce++;
+			$block->setNonce($nonce);
 			$new_hash = hash('sha256', $block->getContent());
 		}
 
@@ -91,6 +103,28 @@ class Blockchain
 	private function getPreviousBlock() : Block
 	{
 		$pos = count($this->blocks) - 1;
-    	return $this->blocks[$len];
-   	}
+    	return $this->blocks[$pos];
+	}
+	
+	/**
+	 * Generates a formated array of the blockchain
+	 *  
+     * @return array
+    */
+	public function display(){
+		$data = [];
+		foreach($this->blocks as $block){
+			$data['content'] = 
+			[
+				"index"     	=> $block->index, 
+				"nonce"			=> $block->getNonce(),
+				"previous_hash"	=> $block->getPreviousHash(),
+				"current_hash"	=> $block->getCurrentHash(),
+				"timestamp" 	=> $block->getTimestamp(),
+				"transactions"	=> $block->getTransactions()
+			];
+		}
+
+		return $data;
+	}
 }
