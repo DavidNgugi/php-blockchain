@@ -36,7 +36,7 @@ class BlockTests extends TestCase
     */
 	public function testNonceIsSet()
 	{
-		$this->assertSame(0, $this->block->nonce);
+		$this->assertSame(0, $this->block->getNonce());
 	}
 
 	/**
