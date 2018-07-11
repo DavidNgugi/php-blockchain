@@ -30,8 +30,8 @@ Example,
 
 ```php
 $blockchain = new TestBlockchain;
-$blockchain->addNewTransactions('David', 'Dan', 200);
-$blockchain->addNewTransactions('Dan', 'David', 100);
+$blockchain->addNewTransaction('David', 'Dan', 200);
+$blockchain->addNewTransaction('Dan', 'David', 100);
 $blockchain->display();
 ```
 
