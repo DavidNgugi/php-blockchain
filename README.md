@@ -26,6 +26,21 @@ Example,
 $blockchain = new TestBlockchain;
 $blockchain->addNewTransactions('David', 'Dan', 200);
 $blockchain->addNewTransactions('Dan', 'David', 100);
+$blockchain->display();
+```
+
+## Batch transactions
+
+```php
+$transactions = [
+    ['David', 'Dan', 200],
+    ['Dan', 'David', 100],
+    ['Cynthia', 'David', 50],
+    ['Martin', 'David', 100]
+];
+
+$blockchain->addManyTransactions($transactions);
+$blockchain->display();
 ```
 
 ## To-Do

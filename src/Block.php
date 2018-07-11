@@ -151,9 +151,28 @@ class Block
      *  
      * @return array
     */
-    public function addTransaction(Transaction $transaction)
+    public function addTransaction(Transaction $transaction) : Array
     {
-        return $this->transactions[] = $transaction;
+        $this->transactions[] = $transaction;
+        return $this->transactions;
+    }
+
+    /**
+     * Adds a new transactions to transactions in a block
+     * 
+     * @param array $transactions
+     *  
+     * @return array
+    */
+    public function addTransactions($transactions) : Array
+    {
+        $transaction = new Transaction;
+        foreach($transactions as $t){
+            if($t instanceof $transaction){
+                $this->transactions[] = $t;
+            }
+        }
+        return $this->transactions;
     }
 
     /**

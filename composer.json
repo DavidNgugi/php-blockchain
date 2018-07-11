@@ -18,12 +18,14 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/",
-            "PHPBlockchain\\": "src/"
+            "PHPBlockchain\\": "src/",
+            "PHPBlockchain\\Examples\\": "examples/" 
         }
     },    
     "autoload": {
         "psr-4": {
-            "PHPBlockchain\\": "src/"
+            "PHPBlockchain\\": "src/",
+            "PHPBlockchain\\Examples\\": "examples/" 
         }
     }
 }

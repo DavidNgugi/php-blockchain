@@ -44,33 +44,30 @@ class Blockchain
 
 	/**
 	 * Sets the new and previous block's hashes and transaction data
-	 * Adds new block to blockchain
+	 * Adds new blocks to blockchain
 	 * 
 	 * @param array $transactions
 	 *  
     */
-	public function addNewBlock($transactions) : Void
+	public function addNewBlocks($transactions) : Void
 	{
-		$block = new Block();
-
 		if(isset($transactions)){
 			foreach ($transactions as $transaction) {
+				$block = new Block();
 				$block->addTransaction($transaction);
+				$len = count($this->blocks);
+				$previousBlock = $this->getPreviousBlock();
+				$block->index = $len;
+				$block->setPreviousHash($previousBlock->getCurrentHash());
+				$new_hash = $this->generateHash($block);
+				$block->setCurrentHash($new_hash);
+				$block->setTimestamp();
+
+				$this->blocks[$len-1] = $previousBlock; // update the previous block
+				$this->blocks[] = $block; // add the new block to the blockchain
 			}
 		}
-
-		$len = count($this->blocks);
-		$previousBlock = $this->getPreviousBlock();
-		$block->index = $len;
-		$block->setPreviousHash($previousBlock->getCurrentHash());
-		$new_hash = $this->generateHash($block);
-		$block->setCurrentHash($new_hash);
-		$block->setTimestamp();
-
-		$this->blocks[$len-1] = $previousBlock; // update the previous block
-		$this->blocks[] = $block; // add the new block to the blockchain
-
-		$transactions = []; // reset transactions
+		// $transactions = []; // reset transactions
 	}
 
 	/**
@@ -112,7 +109,9 @@ class Blockchain
      * @return array
     */
 	public function display(){
-		$data = [];
+		
+		$blockchain_data = [];
+
 		foreach($this->blocks as $block){
 			$data['content'] = 
 			[
@@ -121,10 +120,18 @@ class Blockchain
 				"previous_hash"	=> $block->getPreviousHash(),
 				"current_hash"	=> $block->getCurrentHash(),
 				"timestamp" 	=> $block->getTimestamp(),
-				"transactions"	=> $block->getTransactions()
 			];
+
+			foreach($block->getTransactions() as $transaction){
+				$data['content']['transactions'] = [
+					"from" 		=> $transaction->getFrom(),
+					"to"		=> $transaction->getTo(),
+					"amount"	=> $transaction->getAmount()
+				];
+			}
+			$blockchain_data[] = $data;
 		}
 
-		return $data;
+		return $blockchain_data;
 	}
 }

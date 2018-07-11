@@ -20,14 +20,36 @@ class TestBlockchain {
         print_r($this->blockchain->display());
     }
 
-    public function addNewTransactions($from, $to, $amount): Void{
+    public function addNewTransaction($from, $to, $amount): Void{
         $transactions[] = new Transaction($from, $to, $amount);
-        $this->blockchain->addNewBlock($transactions);
-        $this->display();
+        $this->blockchain->addNewBlocks($transactions);
+    }
+
+    public function addManyTransactions($transactions): Void {
+        $t = [];
+        foreach($transactions as $transaction){
+            $t[] = new Transaction($transaction[0], $transaction[1], $transaction[2]);
+            // $this->blockchain->addNewBlocks($t);
+        }
+
+        $this->blockchain->addNewBlocks($t);
+        
     }
 }
 
 // We do some real tests here
 $blockchain = new TestBlockchain;
-$blockchain->addNewTransactions('David', 'Dan', 200);
-$blockchain->addNewTransactions('Dan', 'David', 100);
+$transactions = [
+    ['David', 'Dan', 200],
+    ['Dan', 'David', 100],
+    ['Cynthia', 'David', 50],
+    ['Martin', 'David', 100]
+];
+
+// Adding single transactions
+// $blockchain->addNewTransaction('David', 'Dan', 200);
+// $blockchain->addNewTransaction('Dan', 'David', 100);
+
+// Adding batch transactions
+$blockchain->addManyTransactions($transactions);
+$blockchain->display();
